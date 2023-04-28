@@ -1,7 +1,7 @@
 const http = require('http')
 const url = require('url')
 // ... insert module for Kafka event production
-const producer = require('./produce')
+// const producer = require('./produce')
 
 const importer = require('./customerImporter')
 const PORT = 3005
@@ -97,9 +97,9 @@ const processCustomer = function (customerObject) {
     }
     customers[customerId] = customerObject
         // check if the either the customer is new or the mandate settings has changed; in both cases: an event needs to be produced
-        if (!oldCustomer || (oldCustomer.connectionId != customerObject.connectionId) || (oldCustomer.connectionMandate != customerObject.connectionMandate)) {
-            producer.produceMessage(JSON.stringify({ "connectionId": customerObject.connectionId, "connectionMandate": customerObject.connectionMandate }))
-        }
+        // if (!oldCustomer || (oldCustomer.connectionId != customerObject.connectionId) || (oldCustomer.connectionMandate != customerObject.connectionMandate)) {
+        //     producer.produceMessage(JSON.stringify({ "connectionId": customerObject.connectionId, "connectionMandate": customerObject.connectionMandate }))
+        // }
     return customerId;
 }
 
