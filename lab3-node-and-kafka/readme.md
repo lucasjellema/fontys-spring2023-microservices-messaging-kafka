@@ -23,7 +23,7 @@ The sources for this part of the lab are in the directory *node-kafka-client* in
 Take a look at the *package.json* file. You will see a dependency configured on *kafkajs*:
 ```
   "dependencies": {
-    "kafkajs": "^2.2.0"
+    "kafkajs": "^2.2.4"
   }
 ```
 Now look at the file *produce.js*. The first line of this Node application also refers to *kafkajs*. When we execute *produce.js*, the Node runtime will try to load the module *kafkajs*. It will try to do so by locating a directory called *kafkajs* under the directory *node-modules* that lives in the root of the application. At this moment, you probably do not yet have this *node-modules* directory. It gets created when you instruct *npm* to download all libraries on which the application depends - as configured in *package.json*.
@@ -66,17 +66,19 @@ Check the contents of the file *consumer.js*. It is quite similar to *producer.j
 
 What goes on in the *consumer.js* application?
 
-* instantiate the KafkaJS client by pointing it towards the brokers in the Kafka clusters; the IP addresses are configured in the docker-compose.yml file
+* instantiate the KafkaJS client by pointing it towards the brokers in the Kafka clusters; the ports are configured in the docker-compose.yml file
 * create a consumer through the KafkaJS client, as a member of consumer group *test-group*
 * connect the consumer
-* subscribe the consumer to a specific topic, indicating that all messages (`fromBeginning:true`) are requested. When fromBeginning is true, the group will use the earliest offset. If set to false, it will use the latest offset. The default is false.
+* subscribe the consumer to a specific topic, indicating that all messages (`fromBeginning:true`) are requested. When fromBeginning is true, the group will use the earliest offset still available in topic (which could be 0) . If set to false, it will use the latest offset. The default is false.
 * define the function that should be invoked for each messages received, using `consumer.run( eachMessage: <function>)` ; in that function, write message details to the console.
 
 
 Run the Kafka Consumer application:
+
 ```
 node consumer.js
 ```
+
 This should print all messages on the *test-topic* to the console. You should see something similar to the following output - with different timestamps obviously - reporting on the consumption of a message that was first produced from *producer.js*:
 
 ```
@@ -109,11 +111,11 @@ Function `consumeMessages` is obviously a consumer of messages from `test-topic`
 
 The blueTeam with two members can obviously outperform the redTeam with just a single consumer. In this case, because the time it takes to process a message is longer than the (production) interval between messages, a single consumer will not be able to keep up and will start falling behind the message producer. A team with two members should be able to keep up - as long as the processing interval is not longer than twice the production interval.
 
-To run this application, execute these steps:
+To run this application, execute these steps open a bash terminal window and navigate to directory *lab3-node-and-kafka/node-client*. Then execute `npm install` to download the node modules this application depends on.
 
 ```
-cd /workspace/fontys-fall2022-microservices-messaging-kafka-dapr/lab3-node-and-kafka/node-multi-kafka-producer-consumer
-npm install 
+cd lab3-node-and-kafka/node-multi-kafka-producer-consumer
+npm install
 node multi-producer-parallel-consumer.js
 ```
 
@@ -129,11 +131,11 @@ With Node, it is fairly easy to publish a web application that allows users to e
 We can also do something similar on the consuming end: publish a web application that makes the messages visible that have been consumed from the Kafka topic. To set the expectations at the right level: the response to an HTTP Request will be a JSON document with all messages received by the consumer. A more fancy UI is left as an exercise to the reader ;-)
  
 ### Node Web Application for Producing Messages
-Earlier in this lab we looked at a very simple Node web application: *hello-world-web*. Now we combine that web application with the Kafka Producer we worked on just before. Look in directory *node-kafka-web-client* and open file *web-producer.js*.
+Earlier (in lab 2) we looked at a very simple Node web application: *hello-world-web*. Now we combine that web application with the Kafka Producer we worked on just before. Look in directory *node-kafka-web-client* and open file *web-producer.js*.
 
 This Node application starts an HTTP Server to handle GET requests. It uses a query parameter called *message* for the content of the message to publish to the Kafka Topic. A module referenced as *./produce* is *required* into the *web-producer.js*. This is interpreted by the Node runtime as: find a local file *produce.js*, load it and make available as public objects anything in *module.exports*. The file *produce.js* is largely the same as before, only this time it does not automatically start generating and publishing messages and it has a function called *produceMessage* that produces one message to the `topic`. This function is exported in *module.exports* and as such available in *web-producer.js*. 
 
-Before you can run the application, you need to bring in the dependencies. To quickly open a terminal window in the right directory, open the content menu for the *web-producer.js* file and choose option *Open in Integrated Terminal*. A terminal window opens and navigates to the correct directory.
+Before you can run the application, you need to bring in the dependencies. To quickly open a terminal window in the right directory, open the context menu for the *web-producer.js* file and choose option *Open in Integrated Terminal*. A terminal window opens and navigates to the correct directory.
 ![](images/open-integrated-terminal.png)  
 
 In this terminal window, now run:
