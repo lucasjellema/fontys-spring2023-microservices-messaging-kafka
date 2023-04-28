@@ -44,25 +44,9 @@ npm start
 ```
 On the console, you should see log output indicating that the CSV file is read and processed.
 
-### Make HTTP Calls to the CRM Microservice
-Using a tool such as Postman or tools like cURL or wget you can try to get in touch with the CRM Microservice. For example to request details on a customer with identifier 42, make the following call:
-``` 
-curl  http://localhost:3005?customerId=42 -v
-```
-You should find the console logging of the CRM service that the request was received, and you should see a response from it whose details are written to the command line by cURL. Defining appropriate status codes and messages go a long way in making the use of APIs a more pleasant experience. Try leaving out the customerId parameter; this should return a list of all customers.
+Note: you will also see error messages because the inability of the application to publish messages to a (non-existing Kafka Topic)/
 
-Now try making a request for customer identifier with which real customer data is associated:
-``` 
-curl  http://localhost:3005?customerId=2 -v
-```
-To create a new customer, use this call with cURL:
-```
-curl POST http://localhost:3005/customers -H "Content-Type: application/json" -d '{    "firstName": "Molly",    "lastName": "Peterson",    "city": "Zeewolde",    "connectionId": "928",   "connectionMandate": "0"}' -v
-```
-
-A new customer is created and the response to this request should indicate the newly assigned customer identifier. Of course you can subsequently GET the details for this new customer, by using that identifier.
-
-## Create Kafka Topic for Connection Mandate settings 
+### Create Kafka Topic for Connection Mandate settings 
 
 The CRM Service is running and it is handling new customers as well as changes to existing customers. The next step to take is to make the CRM service inform the enterprise (IT landscape) of these customer related events. And the first step in realizing this requirement is the creation of a Kafka Topic onto which these events can be published.
 
@@ -86,6 +70,35 @@ You should see the new topic you have just created.
 Note: you can also create a new topic on the *Topics* page in AKHQ
 
 ![](images/create-topic-in-akhf.png)
+
+Stop the Node application if it is still running and then restart it.
+
+```
+npm start
+```
+
+It should run fine this time - still processing the csv-file and now also successfully publishing messages to the *connection-mandates-topic* Kafka Topic. 
+### Make HTTP Calls to the CRM Microservice
+Using a tool such as Postman or tools like cURL or wget you can try to get in touch with the CRM Microservice. For example to request details on a customer with identifier 42, make the following call:
+``` 
+curl  http://localhost:3005?customerId=42 -v
+```
+You should find the console logging of the CRM service that the request was received, and you should see a response from it whose details are written to the command line by cURL. Defining appropriate status codes and messages go a long way in making the use of APIs a more pleasant experience. Try leaving out the customerId parameter; this should return a list of all customers.
+
+Now try making a request for customer identifier with which real customer data is associated:
+``` 
+curl  http://localhost:3005?customerId=2 -v
+```
+To create a new customer, use this call with cURL:
+```
+curl POST http://localhost:3005/customers -H "Content-Type: application/json" -d '{    "firstName": "Molly",    "lastName": "Peterson",    "city": "Zeewolde",    "connectionId": "928",   "connectionMandate": "0"}' -v
+```
+
+A new customer is created and the response to this request should indicate the newly assigned customer identifier. Of course you can subsequently GET the details for this new customer, by using that identifier.
+
+
+
+
 
 ## Extend CRM Microservice with event publication to connection-mandates-topic
 
