@@ -21,6 +21,12 @@ ports:
   - port: 3002
     onOpen: ignore
     visibility: public
+  - port: 3005 # CRM service
+    onOpen: ignore
+    visibility: public
+  - port: 3006 # IoT Platform Service
+    onOpen: ignore
+    visibility: public
 
 
   # Kafka Brokers, Zookeeper 
