@@ -1,6 +1,6 @@
-# based on https://github.com/gschmutz/stream-processing-workshop/blob/master/01-environment/docker/docker-compose.yml
+## based on https://github.com/gschmutz/stream-processing-workshop/blob/master/01-environment/docker/docker-compose.yml
 # does not include: Connect, Schema Registry, KSQL
-# does include KCat (https://docs.confluent.io/platform/current/app-development/kafkacat-usage.html and https://docs.confluent.io/platform/current/tutorials/examples/clients/docs/kafkacat.html#client-examples-kafkacat) 
+# does include KafkaCat (https://docs.confluent.io/platform/current/app-development/kafkacat-usage.html and https://docs.confluent.io/platform/current/tutorials/examples/clients/docs/kafkacat.html#client-examples-kafkacat) 
 # and Kafka HQ (https://akhq.io/) available at http://localhost:28042
 # relies on environment variable PUBLIC_IP 
 # Prepare Environment Variables
@@ -20,8 +20,9 @@ networks:
     name: streaming-platform
 services:
   #  ================================== Zookeeper ========================================== #}
+  #  latest:  image: confluentinc/cp-zookeeper:7.3.3
   zookeeper-1:
-    image: confluentinc/cp-zookeeper:7.3.3
+    image: confluentinc/cp-zookeeper:6.0.1 
     container_name: zookeeper-1
     hostname: zookeeper-1
     ports:
@@ -34,8 +35,9 @@ services:
       ZOOKEEPER_SYNC_LIMIT: 2
     restart: unless-stopped
   #  ================================== Kafka ========================================== #}
+  #  latest: confluentinc/cp-server:7.3.3
   kafka-1:
-    image: confluentinc/cp-server:7.3.3
+    image: confluentinc/cp-kafka:6.0.1
     container_name: kafka-1
     hostname: kafka-1
     depends_on:
@@ -67,7 +69,7 @@ services:
       - ./data-transfer:/data-transfer
     restart: unless-stopped
   kafka-2:
-    image: confluentinc/cp-server:7.3.3
+    image: confluentinc/cp-kafka:6.0.1
     container_name: kafka-2
     hostname: kafka-2
     depends_on:
@@ -99,7 +101,7 @@ services:
       - ./data-transfer:/data-transfer
     restart: unless-stopped
   kafka-3:
-    image: confluentinc/cp-server:7.3.3
+    image: confluentinc/cp-kafka:6.0.1
     container_name: kafka-3
     hostname: kafka-3
     depends_on:
@@ -130,7 +132,7 @@ services:
     volumes:
       - ./data-transfer:/data-transfer
     restart: unless-stopped
-  #  ================================== Kcat  ========================================== #
+ #  ================================== Kcat  ========================================== #
   kcat:
     image: edenhill/kcat:1.7.1
     # latest images is edenhill/kcat:1.7.1 - see https://github.com/edenhill/kcat

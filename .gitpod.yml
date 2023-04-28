@@ -48,6 +48,7 @@ ports:
   # Kafka REST Proxy 
   - port: 8082
     onOpen: ignore
+    visibility: public
 
 
 vscode:
