@@ -1,15 +1,16 @@
 const http = require('http')
 const url = require('url')
-const consumer = require('./consume')
+// const consumer = require('./consume')
 
 const PORT = 3006
 
 const connectionMandates = {}
-const handleConnectionMandateMessage = function(message) {
-    console.log(`Handling ConnectionMandate Message ${message.value.toString()} ` )
-    let connectionMandate = JSON.parse(message.value.toString())
-    connectionMandates[connectionMandate.connectionId]=connectionMandate
-}
+
+// const handleConnectionMandateMessage = function(message) {
+//     console.log(`Handling ConnectionMandate Message ${message.value.toString()} ` )
+//     let connectionMandate = JSON.parse(message.value.toString())
+//     connectionMandates[connectionMandate.connectionId]=connectionMandate
+// }
 
 // create an HTTP server that handles HTTP requests; it is handed two parameters: the request and response objects
 const server = http.createServer((req, res) => {
@@ -38,7 +39,7 @@ const server = http.createServer((req, res) => {
     }
 })
 server.listen(PORT);
-consumer.setMessageHandler(handleConnectionMandateMessage)
-consumer.initializeConsumer();
+// consumer.setMessageHandler(handleConnectionMandateMessage)
+// consumer.initializeConsumer();
 console.log(`HTTP Server is listening at port ${PORT} for HTTP GET requests`)
 
