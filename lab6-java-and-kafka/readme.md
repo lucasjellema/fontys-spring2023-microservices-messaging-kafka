@@ -90,6 +90,7 @@ Then build the Maven project using:
 ```
 mvn clean package
 ```
+![](images/mvn-package-all.png)
 
 This command builds the Fat JAR file: `lab6-java-and-kafka/enterprisemessageplatform/target/enterprisemessageplatform-1.0-SNAPSHOT-jar-with-dependencies.jar` that contains all dependencies for the Kafka producer (and consumer).
 
@@ -100,6 +101,7 @@ java -cp target/enterprisemessageplatform-1.0-SNAPSHOT-jar-with-dependencies.jar
 ```
 
 The logging tells you what is happening: the producer reports for duty, sets up the producer, sends a message and finishes.
+![](images/run-producer.png)
 
 You can check the results on the Kafka Topic, for example in the AQHK browser window. Or in the next section where we will consume from Kafka Topic in a Java application.
 ![](images/msg-from-java-inaqhk.png)
@@ -167,7 +169,7 @@ To run the message consumer, execute this command (from directory `lab6-java-and
 ```
 java -cp target/enterprisemessageplatform-1.0-SNAPSHOT-jar-with-dependencies.jar com.mycomp.emp.Consumer
 ```
-
+![](images/consuming.png)
 
 ### Resources
 

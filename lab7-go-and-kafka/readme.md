@@ -28,9 +28,16 @@ In directory `lab7-go-and-kafka\go-producer` is the source of a Go program `main
 Now run the Producer application to publish messages to the Kafka Topic from the Go program, using these two statements:
 
 ```
- go mod tidy
- go run main.go
+go mod tidy
 ```
+![](images/go-mod-tidy.png)
+
+and 
+
+```
+go run main.go
+```
+
 ![](images/producing.png)
 
 To stop the production of messages, you have to stop the program. 
