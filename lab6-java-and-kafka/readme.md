@@ -102,6 +102,7 @@ java -cp target/enterprisemessageplatform-1.0-SNAPSHOT-jar-with-dependencies.jar
 The logging tells you what is happening: the producer reports for duty, sets up the producer, sends a message and finishes.
 
 You can check the results on the Kafka Topic, for example in the AQHK browser window. Or in the next section where we will consume from Kafka Topic in a Java application.
+![](images/msg-from-java-inaqhk.png)
 
 ### Consuming from test-topic in Java
 
