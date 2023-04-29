@@ -2,7 +2,8 @@
 
 - [Lab - Programmatic interaction with Apache Kafka from Python](#lab---programmatic-interaction-with-apache-kafka-from-python)
   - [Python interacting with Apache Kafka](#python-interacting-with-apache-kafka)
-    - [Producing to test-topic in Node](#producing-to-test-topic-in-node)
+    - [Producing to test-topic in Python](#producing-to-test-topic-in-python)
+    - [Consuming from test-topic in Python](#consuming-from-test-topic-in-python)
 
 In the lab 3, you have produced and consumed messages from Node. In this lab, you will also produce and consume messages in a programmatic way, from Python this time. You will use the Apache Kafka platform that you used in earlier labs as well as the Python run time environment that is also part of the Gitpod workspace. 
 
@@ -12,7 +13,7 @@ As with most languages, multiple libraries are available to interact with Kafka.
 
 The sources for this part of the lab are in the directory *lab5-python-and-kafka* directory.
 
-### Producing to test-topic in Node
+### Producing to test-topic in Python
 
 Open a fresh bash terminal and navigate to directory `lab5-python-and-kafka`.
 
@@ -45,3 +46,22 @@ The result should look - with different message offset values - like this:
 
 ![](images/producer-run.png)
 
+
+### Consuming from test-topic in Python
+
+File `consumer.py` contains the simplest code for consuming messages in Python from Kafka. Details on the library function `KafkaConsumer` can be read in the documentation](https://kafka-python.readthedocs.io/en/master/apidoc/KafkaConsumer.html#kafka.KafkaConsumer).
+
+The `KafkaConsumer` is configured with the (endpoints of the) Kafka brokers, the topic, optionally the group id and optionally the message offset (earliest or latest). An iterator interface is available on KafkaConsumer and an (endless) loop is executed on that iterator, fetching ever more messages as they become available and printing them to the output.  
+
+To execute the consumer, run (in the terminal in directory `lab5-python-and-kafka` ):
+
+```
+python consumer.py
+```
+
+The program prints the messages that were published to the Kafka topic in earlier labs. The program does not stop running: it keeps on polling. You have to forcibly interrupt to break it off.
+
+The result should look - with different message offset values - like this:
+![](images/consumer.png)
+
+When you enable the parameter group_id (the consumer group label), you can run the program again and again get all messages. But if you stop the program and run it again, you will not get those same messages again: a message is consumed only once for a consumer group.
