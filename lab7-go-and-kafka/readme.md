@@ -18,6 +18,15 @@ The sources for this part of the lab are in the directory *lab7-go-and-kafka* di
 
 To produce messages, use either the AsyncProducer or the SyncProducer. The AsyncProducer accepts messages on a channel and produces them asynchronously in the background as efficiently as possible; it is preferred in most cases. The SyncProducer provides a method which will block until Kafka acknowledges the message as produced. This can be useful but comes with two caveats: it will generally be less efficient, and the actual durability guarantees depend on the configured value of `Producer.RequiredAcks`. There are configurations where a message acknowledged by the SyncProducer can still sometimes be lost.
 
+In directory `lab7-go-and-kafka\go-producer`
+
+run
+
+```
+ go run main.go
+```
+
+
 ### Consuming messages from test-topic in Go
 
 To consume messages, use Consumer or Consumer-Group API.
