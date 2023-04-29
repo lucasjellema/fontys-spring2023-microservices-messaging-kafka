@@ -1,5 +1,7 @@
 tasks:
   - command: |
+      gp open README.md
+      gp open lab1-firstStepsWithKafka/readme.md
       export PUBLIC_IP=127.0.0.1
       docker-compose up
       gp env KAFKAJS_NO_PARTITIONER_WARNING=1
