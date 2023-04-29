@@ -59,3 +59,6 @@ producer.send(topic, b'raw_bytes').add_callback(on_send_success).add_errback(on_
 
 # block until all async messages are sent - here asynchronous behavior is synchronized
 producer.flush()
+
+# configure multiple retries
+producer = KafkaProducer(retries=5)
