@@ -1,7 +1,22 @@
 # fontys-spring2023-microservices-messaging-kafka
 Workshop resources for the Fontys Spring 2023 workshop on microservices, messaging and Apache Kafka
 
+This workspace comes with Apache Kafka (Docker Compose with 3-brokers, Zookeeper, AQ HK, Schema Registry and REST Proxy) and Java, Go, Node and Python runtimes as well as Maven, Pip, NPM and other build tools).
+
+A multi part hands on guide is available with many code samples and examples of how to interact with Kafka from various technologies. These are the labs:
+
+* [Getting started with Apache Kafka](./lab1-firstStepsWithKafka/readme.md)
+* [Introduction to Node the programming language](./lab2-introducingNodeJS/readme.md)
+* [Working with Apache Kafka from Node programs](./lab3-node-and-kafka/readme.md)
+* [Do It Yourself CQRS with Apache Kafka and Node](./lab4-diy-cqrs/readme.md)
+* [Kafka from Python](./lab5-python-and-kafka/readme.md)
+* [Kafka from Java](./lab6-java-and-kafka/readme.md)
+* [Kafka from Go](./lab7-go-and-kafka/readme.md)
+
+
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/lucasjellema/fontys-spring2023-microservices-messaging-kafka)
+
+By clicking this button, you will launch a Gitpod workspace - associated with your Github account. This is free. At the time of writing, the first 50 hours each month (yes, *50 hours* again *each month*) of workspace usage are free. This workspace comes with VS Code in the browser, the language runtimes and build tools as well as Docker and Docker Compose. Once running, the workspace is initialized from the GitHub repo with all sources and this README document, Docker Compose is started to launch the containers for the Apache Kafka Cluster and supporting tooling.
 
 ## Working in your local VS Code (against the Gitpod workspace)
 If you prefer to work with your local desktop version of VS Code instead of VS Code in the browser or you like to access one of the services and ports running in the Gitpod workspace from your own laptop, you can certainly do so. Try to open a workspace in your local VS Code desktop for the smoothest dev experience (using port forwarding for services and web applications). 
