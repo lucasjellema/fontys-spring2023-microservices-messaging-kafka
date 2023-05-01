@@ -210,14 +210,17 @@ services:
       KAFKA_REST_LISTENERS: "http://0.0.0.0:8082"
       KAFKA_REST_SCHEMA_REGISTRY_URL: 'http://schema-registry:8081'
 
-  # adding Kafka Magic (https://www.kafkamagic.com/)
-  # To connect to a Kafka Cluster In the UI click ‘Register New’ button and register your dev cluster with these two parameters:
+  # adding Kafka Magic (https://www.kafkamagic.com/); note:L without License Key, functionality is limited to browsing topcis and partitions
+  # To connect to a Kafka Cluster In the UI click ‘Register New’ button and define your Kafka cluster with these parameters:
+  # for Cluster Name enter a value you like for your cluster - such as *My Local Kafka Cluster*  
   # for Bootstrap Servers enter: kafka-1:19092,kafka-2:19093,kafka-3:19094
-  #for Schema Registry URL enter: http://schema-registry:8081
-  magic:
-    image: digitsy/kafka-magic
-    ports:
-      - "8080:80"
-    environment:
-      KMAGIC_ALLOW_TOPIC_DELETE: "true"
-      KMAGIC_ALLOW_SCHEMA_DELETE: "true"      
+  # for Schema Registry URL enter: http://schema-registry:8081
+  # after entering these values, click on the *Verify* link to see if the connection can be created. When successful, click on *Register Connection* to create the connection
+
+  # magic:
+  #   image: digitsy/kafka-magic
+  #   ports:
+  #     - "8080:80"
+  #   environment:
+  #     KMAGIC_ALLOW_TOPIC_DELETE: "true"
+  #     KMAGIC_ALLOW_SCHEMA_DELETE: "true"      
