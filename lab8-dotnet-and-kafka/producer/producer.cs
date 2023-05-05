@@ -10,13 +10,12 @@ class Producer {
                             ClientId = "dotnet-producer",
                             };
 
-               const string topic = "test-topic";
+        const string topic = "test-topic";
 
         string[] users = { "eabara", "jsmith", "sgarcia", "jbernard", "htanaka", "awalther" };
         string[] items = { "book", "alarm clock", "t-shirts", "gift card", "batteries" };
 
-        using (var producer = new ProducerBuilder<string, string>(
-            config).Build())
+        using (var producer = new ProducerBuilder<string, string>(config).Build())
         {
             var numProduced = 0;
             Random rnd = new Random();

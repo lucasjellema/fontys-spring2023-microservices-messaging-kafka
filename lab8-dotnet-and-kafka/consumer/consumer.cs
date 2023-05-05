@@ -7,13 +7,15 @@ class Consumer {
 
     static void Main(string[] args)
     {
-         var config = new ConsumerConfig {
+        var config = new ConsumerConfig {
                             BootstrapServers = "localhost:29092,localhost:29093,localhost:29094", 
                             ClientId = "dotnet-consumer",
                             };
-            config.GroupId = "dotnet-kafka-consumer";
-            config.AutoOffsetReset = AutoOffsetReset.Earliest;
-            config.EnableAutoCommit = true;
+        config.GroupId = "dotnet-kafka-consumer";
+        config.AutoOffsetReset = AutoOffsetReset.Earliest;
+        config.EnableAutoCommit = true;
+
+
         const string topic = "test-topic";
 
         CancellationTokenSource cts = new CancellationTokenSource();
@@ -22,8 +24,7 @@ class Consumer {
             cts.Cancel();
         };
 
-        using (var consumer = new ConsumerBuilder<string, string>(
-            config).Build())
+        using (var consumer = new ConsumerBuilder<string, string>(config).Build())
         {
             consumer.Subscribe(topic);
             try {
