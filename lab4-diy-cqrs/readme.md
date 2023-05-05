@@ -45,10 +45,12 @@ npm start
 On the console, you should see log output indicating that the CSV file is read and processed.
 
 ### Make HTTP Calls to the CRM Microservice
-Using a tool such as Postman or tools like cURL or wget you can try to get in touch with the CRM Microservice. For example to request details on a customer with identifier 42, make the following call:
+Using a tool such as Postman or tools like cURL or wget you can try to get in touch with the CRM Microservice. For example to request details on a customer with identifier 42 , make the following call:
 ``` 
 curl  http://localhost:3005?customerId=42 -v
 ```
+Note: there is no customer with this id! 
+
 You should find the console logging of the CRM service that the request was received, and you should see a response from it whose details are written to the command line by cURL. Defining appropriate status codes and messages go a long way in making the use of APIs a more pleasant experience. Try leaving out the customerId parameter; this should return a list of all customers.
 
 Now try making a request for customer identifier with which real customer data is associated:
@@ -72,10 +74,10 @@ Like you did in Lab 1, open a terminal window on the Docker Host and run a `dock
 ```
 docker exec -ti kafka-1 bash
 ```
-Now let's create a new topic. For that we use the **kafka-topics** utility with the `--create` option. Create a *connection-mandates-topic* topic with 4 partitions and a replication factor of 2.  
+Now let's create a new topic. For that we use the **kafka-topics** utility with the `--create` option. Create a *connection-mandates-topic* topic with 1 partition and a replication factor of 2.  
 
 ```
-kafka-topics --create --if-not-exists --zookeeper zookeeper-1:2181 --topic connection-mandates-topic --partitions 4 --replication-factor 2
+kafka-topics --create --if-not-exists --zookeeper zookeeper-1:2181 --topic connection-mandates-topic --partitions 1 --replication-factor 2
 ```
 Run this command to list the topics.
 
@@ -176,9 +178,9 @@ Start the IoT Platform microservice again, using
 ```
 npm start
 ```
-What you should see happening now is that after a few seconds the HTTP Server reports for duty - listening on Port 3006. And shortly after that, the Kafka Stream Consumer is created and initialized and starts to consume messages - even though none are being published at the moment. Try to understand which messages are consumer when the microservice is started.
+What you should see happening now is that after a few seconds the HTTP Server reports for duty - listening on Port 3006. And shortly after that, the Kafka Stream Consumer is created and initialized and starts to consume messages - even though none are being published at the moment. Try to understand which messages are consumed when the microservice is started.
 
-At this time, we can again attempt to retrieve the connect mandata status for a specific connection identifier:
+At this time, we can again attempt to retrieve the connect mandate status for a specific connection identifier:
 
 ``` 
 curl  http://localhost:3006?connectionId=7733 -v
@@ -186,7 +188,7 @@ curl  http://localhost:3006?connectionId=7733 -v
 
 This time you should get a connection mandate setting. Its level is probably 1 - because that is how it is defined in the *customer-database.csv* file.
 
-When you now change the connection mandate for this connection identifier, this change should rapidly be available in the IoT Platform service as well. Try this out with this call with cURL:
+When you now change the connection mandate for this connection identifier, this change should rapidly be available in the IoT Platform service as well. Try this out with this call to the CRM service with cURL:
 
 ```
 curl POST http://localhost:3005/customers/7 -H "Content-Type: application/json" -d '{    "firstName": "Corinne",    "lastName": "Lopez",    "city": "Enschede",    "connectionId": "7733",   "connectionMandate": "2"}' -v
