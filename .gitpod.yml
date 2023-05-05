@@ -1,5 +1,16 @@
 tasks:
-  - command: |
+  - name: install dotnet environment
+    init: |
+      wget https://dot.net/v1/dotnet-install.sh && chmod +x dotnet-install.sh && ./dotnet-install.sh 
+      echo 'export DOTNET_ROOT=$HOME/.dotnet' >> ~/.bashrc
+      echo 'export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools' >> ~/.bashrc
+    command: |
+      export DOTNET_ROOT=$HOME/.dotnet
+      export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
+      dotnet sdk check
+
+  - name: install Apache Kafka Cluster
+    command: |
       gp open README.md
       gp open lab1-firstStepsWithKafka/readme.md
       export PUBLIC_IP=127.0.0.1
