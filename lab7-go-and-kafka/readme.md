@@ -12,7 +12,7 @@ In the labs 3, 5 and 6, you have produced and consumed messages from Node, Pytho
 
 Several libraries are available for interaction with Apache Kafka from Go. See [this list on the Apache Kafka website](https://cwiki.apache.org/confluence/display/KAFKA/Clients#Clients-Go(AKAgolang)). Then there is also [Franz-Go](https://github.com/twmb/franz-go) with 1K stars on GitHub. The most popular seems to be [Sarama](https://github.com/Shopify/sarama) (10K stars). We will use that library in this lab: "Package sarama is a pure Go client library for dealing with Apache Kafka (versions 0.8 and later). It includes a high-level API for easily producing and consuming messages, and a low-level API for controlling bytes on the wire when the high-level API is insufficient. Usage examples for the high-level APIs are provided inline with their full documentation."
 
-The sources for this part of the lab are in the directory *lab7-go-and-kafka* directory.
+The sources for this part of the lab are in the directory *lab7-go-and-kafka*.
 
 ### Producing to test-topic in Go
 
