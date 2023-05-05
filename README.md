@@ -1,7 +1,7 @@
 # fontys-spring2023-microservices-messaging-kafka
 Workshop resources for the Fontys Spring 2023 workshop on microservices, messaging and Apache Kafka
 
-This workspace comes with Apache Kafka (Docker Compose with 3-brokers, Zookeeper, AQ HK, Schema Registry and REST Proxy) and Java, Go, Node and Python runtimes as well as Maven, Pip, NPM and other build tools).
+This workspace comes with Apache Kafka (Docker Compose with 3-brokers, Zookeeper, AQ HK, Schema Registry and REST Proxy) and Java, Go, Node. .MET and Python runtimes as well as Maven, Pip, NPM and other build tools).
 
 A multi part hands on guide is available with many code samples and examples of how to interact with Kafka from various technologies. These are the labs:
 
@@ -12,7 +12,9 @@ A multi part hands on guide is available with many code samples and examples of 
 * [Kafka from Python](./lab5-python-and-kafka/readme.md)
 * [Kafka from Java](./lab6-java-and-kafka/readme.md)
 * [Kafka from Go](./lab7-go-and-kafka/readme.md)
+* [Kafka from .NET](./lab8-net/readme.md)
 
+Note: the labs on Python, Java, Go and .NET do not depend on each other or on any other labs except for the first lab (where the topic created)
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/lucasjellema/fontys-spring2023-microservices-messaging-kafka)
 
